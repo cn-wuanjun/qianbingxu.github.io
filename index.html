@@ -302,7 +302,20 @@
       
         
           
-            <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">findString <span class="string">"abc"</span> <span class="string">"a"</span> -&gt; <span class="number">1</span></span></pre></td></tr></table></figure>
+            <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">findString <span class="string">"abc"</span> <span class="string">"a"</span> -&gt; <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">findString <span class="string">"abc"</span> <span class="string">"d"</span> -&gt; undefined</span></pre></td></tr></table></figure>
+
+<h3 id="gamma值相关"><a href="#gamma值相关" class="headerlink" title="gamma值相关"></a>gamma值相关</h3><ul>
+<li>获取3ds max的gamma值 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">local temp &#x3D; IDisplayGamma.gamma</span></pre></td></tr></table></figure></li>
+<li>设置3ds max的gamma值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">IDisplayGamma.gamma &#x3D; 1.22</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="声明变量的方式"><a href="#声明变量的方式" class="headerlink" title="声明变量的方式"></a>声明变量的方式</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">global a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">local a</span></pre></td></tr></table></figure>
+
+<h3 id="UI组件"><a href="#UI组件" class="headerlink" title="UI组件"></a>UI组件</h3><h4 id="GroupBox"><a href="#GroupBox" class="headerlink" title="GroupBox"></a>GroupBox</h4><p>示例:</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">GroupBox grp1 <span class="string">"相机"</span> pos:[<span class="number">10</span>,<span class="number">10</span>] width:<span class="number">300</span> height:<span class="number">150</span></span></pre></td></tr></table></figure>
+
+
 
 
           
