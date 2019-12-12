@@ -231,6 +231,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.qianbingxu.cn/2019/12/12/Mybatis%E5%A4%9A%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="钱炳旭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="钱炳旭的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/12/Mybatis%E5%A4%9A%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/" itemprop="url">Mybatis多参数传递</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-12T16:06:59+08:00">
+                2019-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="索引方式"><a href="#索引方式" class="headerlink" title="索引方式"></a>索引方式</h5><p><strong><em>通过索引方式,来指定想传入的参数,<code>#{index}</code>,索引从0开始:</em></strong><br>DAO:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int get(String a,int b);</span></pre></td></tr></table></figure>
+<p>XML:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;select id&#x3D;&quot;get&quot; resultType&#x3D;&quot;int&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    select id from table </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    where a&#x3D;#&#123;0&#125; and b&#x3D;#&#123;1&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;select&gt;</span></pre></td></tr></table></figure>
+<p>注意：<br>1.由于是多参数传入，所以不需要对<code>parameterType</code>进行配置。<br>2.由于使用索引方式，所以在<code>DAO</code>接口中不需要使用<code>@Param</code>注解来注明参数名</p>
+<h5 id="注解方式"><a href="#注解方式" class="headerlink" title="注解方式"></a>注解方式</h5><p><strong><em>通过MyBatis的注解(<code>@Param（&quot;paramName&quot;）</code>)方式来注明参数</em></strong><br>DAO:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int get(@Param(&quot;a&quot;)String a,@Param(&quot;b&quot;)int b);</span></pre></td></tr></table></figure>
+<p>XML:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;select id&#x3D;&quot;get&quot; resultType&#x3D;&quot;int&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    select id from table </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    where a&#x3D;#&#123;a&#125; and b&#x3D;#&#123;b&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;select&gt;</span></pre></td></tr></table></figure>
+<p>注意：<br>1.同样由于是多参数传入，所以不需要对parameterType进行配置。</p>
+<h5 id="Map对象方式"><a href="#Map对象方式" class="headerlink" title="Map对象方式"></a>Map对象方式</h5><p><strong><em>通过Map方式传递多个参数，map中的key的名字就是对应xml配置中#{}中使用的那个</em></strong><br>DAO:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int get(Map map);</span></pre></td></tr></table></figure>
+<p>XML:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;select id&#x3D;&quot;get&quot; resultType&#x3D;&quot;int&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    select id from table </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    where a&#x3D;#&#123;a&#125; and b&#x3D;#&#123;b&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;select&gt;</span></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.qianbingxu.cn/2019/12/11/Electron%E5%BF%83%E5%BE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -793,7 +925,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -806,7 +938,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
